@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">MobileAss</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="login">Login</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="register">Register</string>
+    <string name="registered">Already Have Account</string>
+    <string name="noRegister">New? Create a new account</string>
+    <string name="profile">Profile</string>
+    <string name="username_dash">Username</string>
+    <string name="name">Name</string>
+    <string name="change">Change password</string>
+    <string name="changepassword">change</string>
+    <string name="occupation">Occupation</string>
+    <string name="family_member">Family member</string>
+    <string name="salary">Salary</string>
+    <string name="logout">Logout</string>
+    <string name="delete_account">Account Deletion</string>
+    <string name="save">Save</string>
+    <string name="emptyField">Cannot leave empty\n</string>
+    <string name="account_setting">Account Settings</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="reset_password">Reset Password</string>
+</resources>

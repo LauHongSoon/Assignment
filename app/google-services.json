@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1082877095317",
+    "project_id": "mobile-28e12",
+    "storage_bucket": "mobile-28e12.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082877095317:android:deb1fcc0ffdfba380b5a9c",
+        "android_client_info": {
+          "package_name": "my.edu.tarc.mobileass"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1082877095317-m3vsu0rdo9067ll2hc0b2oipg49hhbtq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuUubVKyzFEn2C0NhRgCwEViOFwiXFSi0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1082877095317-m3vsu0rdo9067ll2hc0b2oipg49hhbtq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
