@@ -52,11 +52,11 @@ class LoginActivity : AppCompatActivity() {
                 view.findViewById<TextView>(R.id.textView2).setText("Reset Password")
                 view.findViewById<Button>(R.id.buttonSubmit).setText("Reset")
                 view.findViewById<Button>(R.id.buttonCancel).setText("Cancel")
-                val email=view.findViewById<EditText>(R.id.registerEmail)
+                val email=view.findViewById<EditText>(R.id.forgotEmail)
                 val dialog = builder.create()
                 view.findViewById<Button>(R.id.buttonSubmit).setOnClickListener {
 
-                    if(view.findViewById<EditText>(R.id.registerEmail).text.isNullOrEmpty()){
+                    if(view.findViewById<EditText>(R.id.forgotEmail).text.isNullOrEmpty()){
                         Toast.makeText(this,"Please insert your email",Toast.LENGTH_SHORT).show()
                     }
                     else{
