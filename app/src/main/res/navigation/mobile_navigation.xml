@@ -47,4 +47,9 @@
             android:id="@+id/action_accountFragment_to_navigation_home"
             app:destination="@id/navigation_home" />
     </fragment>
+    <fragment
+        android:id="@+id/navigation_expenses"
+        android:name="my.edu.tarc.mobileass.ui.expense.ExpenseHomeFragment"
+        android:label="fragment_expense_home"
+        tools:layout="@layout/fragment_expense_home" />
 </navigation>

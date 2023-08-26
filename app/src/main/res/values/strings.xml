@@ -32,4 +32,5 @@
     <string name="reauthenticate_account">Reauthenication before delete account</string>
     <string name="password">Password</string>
     <string name="profile_settings">Profile Settings</string>
+    <string name="expenses">Expense</string>
 </resources>
