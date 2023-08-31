@@ -50,10 +50,10 @@ class DashboardFragment : Fragment() {
             }
         }
         binding.profileS.setOnClickListener{
-            findNavController().navigate(R.id.action_navigation_dashboard_to_accountFragment)
+            findNavController().navigate(R.id.action_navigation_dashboard_to_profileFragment)
         }
         binding.accountS.setOnClickListener{
-            findNavController().navigate(R.id.action_navigation_dashboard_to_profileFragment)
+            findNavController().navigate(R.id.action_navigation_dashboard_to_accountFragment)
         }
         return binding.root
     }

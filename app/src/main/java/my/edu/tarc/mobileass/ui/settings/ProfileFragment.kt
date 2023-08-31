@@ -52,7 +52,10 @@ class ProfileFragment : Fragment() {
         Firebase.firestore.collection("users")
             .document(email)
             .update(mapOf(
-                "name" to binding.editUsername.text.toString()
+                "name" to binding.editUsername.text.toString(),
+                "occupation" to binding.editTextOccupation.text.toString(),
+                "salary" to binding.editTextSalary.text.toString(),
+                "targetSaving" to binding.editTextTargetSaving.text.toString(),
             ))
             .addOnSuccessListener {  Toast.makeText(requireContext(),"Successfully", Toast.LENGTH_SHORT).show()}
             .addOnFailureListener {
@@ -69,8 +72,11 @@ class ProfileFragment : Fragment() {
         Firebase.firestore.collection("users")
             .document(email)
             .get().addOnSuccessListener {
+                binding.textView.setText(it.getString("email"))
                 binding.editUsername.setText(it.getString("name"))
-
+                binding.editTextOccupation.setText(it.getString("occupation"))
+                binding.editTextSalary.setText(it.getString("salary"))
+                binding.editTextTargetSaving.setText(it.getString("targetSaving"))
             }
             .addOnFailureListener {
                 Toast.makeText(requireContext(),"Error", Toast.LENGTH_SHORT).show()
