@@ -19,8 +19,15 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="45dp"
-        app:fab_expandDirection="down"
-        app:fab_labelsPosition="right">
+        app:fab_expandDirection="up"
+        app:fab_labelsPosition="left">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_title="Add Expense Record">
+
+        </com.getbase.floatingactionbutton.FloatingActionButton>
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 </RelativeLayout>
