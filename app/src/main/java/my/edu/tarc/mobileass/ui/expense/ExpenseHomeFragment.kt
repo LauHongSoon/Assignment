@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 import my.edu.tarc.mobileass.R
@@ -35,7 +36,7 @@ class ExpenseHomeFragment : Fragment() {
         popupMenu.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.add -> {
-                    // Handle Option 1 click
+                    findNavController().navigate(R.id.action_navigation_expenses_to_addNewExpenseFragment)
                     true
                 }
                 R.id.action_option2 -> {
