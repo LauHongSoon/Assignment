@@ -41,8 +41,10 @@
     <string name="category">Category</string>
     <string-array name="category">
         <item>Utility Fee</item>
-        <item>Groce</item>
-        <item>Category 3</item>
-        <item>Category 4</item>
+        <item>Grocery</item>
+        <item>Rent</item>
+        <item>Entertainment</item>
+        <item>Loan</item>
+        <item>Other</item>
     </string-array>
 </resources>

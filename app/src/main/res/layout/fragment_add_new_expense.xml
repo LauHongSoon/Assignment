@@ -60,7 +60,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/editTextTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
@@ -73,7 +73,7 @@
         app:layout_constraintVertical_bias="0.65" />
 
     <EditText
-        android:id="@+id/editTextNumber"
+        android:id="@+id/editTextExpense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
@@ -112,5 +112,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="110dp" />
+
+    <Button
+        android:id="@+id/buttonExpenseSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="412dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

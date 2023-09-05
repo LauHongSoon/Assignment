@@ -7,7 +7,6 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import my.edu.tarc.mobileass.R
 import my.edu.tarc.mobileass.databinding.ActivityRegisterBinding
 import my.edu.tarc.mobileass.model.UserDetail
 
