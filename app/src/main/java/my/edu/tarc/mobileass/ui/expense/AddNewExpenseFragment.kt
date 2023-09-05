@@ -4,11 +4,13 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -16,12 +18,13 @@ import my.edu.tarc.mobileass.databinding.FragmentAddNewExpenseBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
-import my.edu.tarc.mobileass.ui.expense.expenseViewModel
 
 
 class AddNewExpenseFragment : Fragment() {
     private var _binding: FragmentAddNewExpenseBinding? = null
     private val calendar = Calendar.getInstance()
+    private lateinit var spinner: Spinner
+    private lateinit var spinnerAdapter: ArrayAdapter<String>
     private lateinit var preferences: SharedPreferences
     private lateinit var firebaseAuth: FirebaseAuth
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
@@ -39,6 +42,13 @@ class AddNewExpenseFragment : Fragment() {
         _binding = FragmentAddNewExpenseBinding.inflate(inflater, container, false)
         val root: View = binding.root
         firebaseAuth = FirebaseAuth.getInstance()
+        spinner = binding.spinner
+
+        // Create an ArrayAdapter and set it to the spinner
+        val spinnerValues = arrayOf("--Select One--", "Utility Fee", "Grocery","Rent","Entertainment","Loan","Other") // Replace with your spinner values
+        spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerValues)
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = spinnerAdapter
         return root
     }
 
