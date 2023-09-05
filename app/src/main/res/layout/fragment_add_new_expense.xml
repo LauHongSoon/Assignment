@@ -91,7 +91,6 @@
         android:scrollbarSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView8"
         app:layout_constraintEnd_toEndOf="parent"
-        bind:selectedValue="@={viewModel.selectedCategory}"
         app:layout_constraintTop_toTopOf="@+id/textView8"
         app:layout_constraintVertical_bias="0.0" />
 
