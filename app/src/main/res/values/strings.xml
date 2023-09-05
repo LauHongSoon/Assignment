@@ -39,4 +39,10 @@
     <string name="totalexpense">Total Expense</string>
     <string name="date">Date</string>
     <string name="category">Category</string>
+    <string-array name="category">
+        <item>Utility Fee</item>
+        <item>Groce</item>
+        <item>Category 3</item>
+        <item>Category 4</item>
+    </string-array>
 </resources>

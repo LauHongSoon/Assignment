@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import my.edu.tarc.mobileass.databinding.FragmentAddNewExpenseBinding
 import java.text.SimpleDateFormat
-import android.widget.DatePicker
 import java.util.Calendar
 import java.util.Locale
 
@@ -35,7 +34,7 @@ class AddNewExpenseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.buttonDate.setOnClickListener{
+        binding.buttonDate.setOnClickListener {
             showDatePickerDialog()
         }
     }
