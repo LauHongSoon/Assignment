@@ -69,6 +69,7 @@ class AddNewExpenseFragment : Fragment() {
             title = binding.editTextTitle.text.toString(),
             date=binding.buttonDate.text.toString(),
             user=email,
+            category=binding.spinner.selectedItem.toString(),
             expense=binding.editTextExpense.text.toString().toFloat()
         )
         Firebase.firestore.collection("expense").document()
