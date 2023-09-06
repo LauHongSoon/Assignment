@@ -39,6 +39,8 @@
     <string name="totalexpense">Total Expense</string>
     <string name="date">Date</string>
     <string name="category">Category</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete\n</string>
     <string-array name="category">
         <item>Utility Fee</item>
         <item>Grocery</item>
