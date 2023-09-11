@@ -30,10 +30,7 @@ class ExpenseHomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentExpenseHomeBinding.inflate(inflater, container, false)
-        list = ArrayList()
-        list = getExpense()
-        adapter = ExpenseListAdapter(requireContext(), list)
-        binding.allExpenseRecycle.adapter = adapter
+
 
 
 
@@ -73,6 +70,10 @@ class ExpenseHomeFragment : Fragment() {
         fab.setOnClickListener {
             showPopupMenu(it)
         }
+        list = ArrayList()
+        list = getExpense()
+        adapter = ExpenseListAdapter(requireContext(), list)
+        binding.allExpenseRecycle.adapter = adapter
 
 
     }
