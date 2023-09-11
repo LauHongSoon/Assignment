@@ -1,6 +1,6 @@
 package my.edu.tarc.mobileass.ui.expense
 
-data class expenseViewModel(
+data class ExpenseViewModel(
     val title:String?="",
     val date : String? = "",
     val expense : Float? ,

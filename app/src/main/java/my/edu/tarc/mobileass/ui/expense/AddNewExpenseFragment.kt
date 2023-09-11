@@ -65,7 +65,7 @@ class AddNewExpenseFragment : Fragment() {
     private fun saveRecord() {
         preferences = requireActivity().getSharedPreferences("user", Context.MODE_PRIVATE)
         val email = preferences.getString("email", "")!!
-        val data =  expenseViewModel(
+        val data =  ExpenseViewModel(
             title = binding.editTextTitle.text.toString(),
             date=binding.buttonDate.text.toString(),
             user=email,
