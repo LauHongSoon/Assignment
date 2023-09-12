@@ -47,7 +47,7 @@
                 android:id="@+id/textView11"
                 style="@style/recycle_expense"
                 android:layout_marginStart="88dp"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="5dp"
                 android:text="@string/date"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
