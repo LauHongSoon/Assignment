@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import my.edu.tarc.mobileass.databinding.FragmentAddNewExpenseBinding
+import my.edu.tarc.mobileass.model.ExpenseViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -70,7 +71,7 @@ class AddNewExpenseFragment : Fragment() {
             date=binding.buttonDate.text.toString(),
             user=email,
             category=binding.spinner.selectedItem.toString(),
-            expense=binding.editTextExpense.text.toString().toFloat()
+            expense=binding.editTextExpense.text.toString()
         )
         Firebase.firestore.collection("expense").document()
             .set(data).addOnSuccessListener {

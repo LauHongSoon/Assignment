@@ -33,9 +33,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/allExpenseRecycle"
         android:layout_width="match_parent"
-        android:layout_height="656dp"
+        android:layout_height="0dp"
+        android:nestedScrollingEnabled="true"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@+id/textView9"
-        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteX="0dp"
         tools:listitem="@layout/all_expense_layout" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
