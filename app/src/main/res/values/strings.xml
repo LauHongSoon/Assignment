@@ -41,6 +41,7 @@
     <string name="category">Category</string>
     <string name="update">Update</string>
     <string name="delete">Delete\n</string>
+    <string name="edit">Edit Expense\n</string>
     <string-array name="category">
         <item>Utility Fee</item>
         <item>Grocery</item>

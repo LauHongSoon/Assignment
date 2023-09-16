@@ -11,9 +11,11 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import my.edu.tarc.mobileass.R
 import my.edu.tarc.mobileass.databinding.FragmentAddNewExpenseBinding
 import my.edu.tarc.mobileass.model.ExpenseViewModel
 import java.text.SimpleDateFormat
@@ -64,19 +66,23 @@ class AddNewExpenseFragment : Fragment() {
     }
 
     private fun saveRecord() {
+        val db = Firebase.firestore.collection("expense")
+        val key = db.document().id
         preferences = requireActivity().getSharedPreferences("user", Context.MODE_PRIVATE)
         val email = preferences.getString("email", "")!!
         val data =  ExpenseViewModel(
             title = binding.editTextTitle.text.toString(),
             date=binding.buttonDate.text.toString(),
             user=email,
+            id = key,
             category=binding.spinner.selectedItem.toString(),
             expense=binding.editTextExpense.text.toString()
         )
-        Firebase.firestore.collection("expense").document()
+        Firebase.firestore.collection("expense").document(key)
             .set(data).addOnSuccessListener {
                 val user = FirebaseAuth.getInstance().getCurrentUser()
                 var email:String? = ""
+                findNavController().navigate(R.id.action_addNewExpenseFragment_to_navigation_expenses)
                 user?.let {
                     email = it.email
                 }

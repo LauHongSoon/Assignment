@@ -55,10 +55,26 @@
         <action
             android:id="@+id/action_navigation_expenses_to_addNewExpenseFragment"
             app:destination="@id/addNewExpenseFragment" />
+        <action
+            android:id="@+id/action_navigation_expenses_to_editExpenseFragment"
+            app:destination="@id/editExpenseFragment" />
     </fragment>
     <fragment
         android:id="@+id/addNewExpenseFragment"
         android:name="my.edu.tarc.mobileass.ui.expense.AddNewExpenseFragment"
         android:label="fragment_add_new_expense"
-        tools:layout="@layout/fragment_add_new_expense" />
+        tools:layout="@layout/fragment_add_new_expense" >
+        <action
+            android:id="@+id/action_addNewExpenseFragment_to_navigation_expenses"
+            app:destination="@id/navigation_expenses" />
+    </fragment>
+    <fragment
+        android:id="@+id/editExpenseFragment"
+        android:name="my.edu.tarc.mobileass.ui.expense.EditExpenseFragment"
+        android:label="fragment_edit_expense"
+        tools:layout="@layout/fragment_edit_expense" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+    </fragment>
 </navigation>

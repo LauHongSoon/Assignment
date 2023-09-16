@@ -65,8 +65,6 @@ class ExpenseHomeFragment : Fragment() {
         fab.setOnClickListener {
             showPopupMenu(it)
         }
-
-
     }
 
 

@@ -6,4 +6,5 @@ data class ExpenseViewModel(
     val date : String? = "",
     val expense : String="",
     val category:String?="",
+    val id:String?=""
 )
