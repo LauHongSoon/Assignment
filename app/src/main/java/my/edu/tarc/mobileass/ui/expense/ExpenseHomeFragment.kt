@@ -11,6 +11,7 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import my.edu.tarc.mobileass.R
@@ -40,6 +41,7 @@ class ExpenseHomeFragment : Fragment() {
         val email = preferences.getString("email", "")!!
         Firebase.firestore.collection("expense")
             .whereEqualTo("user",email)
+            .orderBy("date",Query.Direction.DESCENDING)
             .addSnapshotListener { querySnapshot, e ->
                 if (e != null) {
                     Log.d("MyApp", "Listen failed.", e)

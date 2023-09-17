@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -15,7 +16,6 @@ import my.edu.tarc.mobileass.databinding.FragmentEditExpenseBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
-
 class EditExpenseFragment : Fragment() {
     private lateinit var binding: FragmentEditExpenseBinding
     private val args : EditExpenseFragmentArgs by navArgs()
@@ -43,6 +43,7 @@ class EditExpenseFragment : Fragment() {
 
         binding.buttonExpenseSave.setOnClickListener(){
             saveRecord()
+            findNavController().navigateUp()
         }
         return binding.root
     }
@@ -60,6 +61,9 @@ class EditExpenseFragment : Fragment() {
                 "expense" to newExpense,
                 "category" to newCategory,
                 "title" to newTitle,))
+            .addOnSuccessListener{
+
+            }
     }
 
     private fun showDatePickerDialog() {
