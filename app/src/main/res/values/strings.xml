@@ -49,4 +49,11 @@
         <item>Loan</item>
         <item>Other</item>
     </string-array>
+    <string name="type_your_task">Type your task .....</string>
+
+    <string-array name="Category">
+        <item>Personal</item>
+        <item>Work</item>
+        <item>Study</item>
+    </string-array>
 </resources>
