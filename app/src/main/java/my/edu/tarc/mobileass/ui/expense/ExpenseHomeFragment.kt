@@ -20,6 +20,7 @@ import my.edu.tarc.mobileass.R
 import my.edu.tarc.mobileass.adapter.ExpenseListAdapter
 import my.edu.tarc.mobileass.databinding.FragmentExpenseHomeBinding
 import my.edu.tarc.mobileass.model.ExpenseViewModel
+import java.util.Calendar
 
 
 class ExpenseHomeFragment : Fragment() {
@@ -35,7 +36,29 @@ class ExpenseHomeFragment : Fragment() {
         binding = FragmentExpenseHomeBinding.inflate(layoutInflater)
         getExpense()
         loadUser()
+        calculateExpense()
         return binding.root
+
+    }
+
+    private fun calculateExpense() {
+        val currentDate = Calendar.getInstance().time
+        val currentMonth = Calendar.getInstance()
+        currentMonth.time = currentDate
+        currentMonth.set(Calendar.DAY_OF_MONTH, 1)
+        val startDate = currentMonth.time
+
+        val endOfMonth = Calendar.getInstance()
+        endOfMonth.time = currentDate
+        endOfMonth.set(Calendar.DAY_OF_MONTH, endOfMonth.getActualMaximum(Calendar.DAY_OF_MONTH)) // Set to the last day of the month
+        val endDate = endOfMonth.time
+        preferences = requireActivity().getSharedPreferences("user", Context.MODE_PRIVATE)
+        val email = preferences.getString("email", "")!!
+        Firebase.firestore.collection("expense")
+            .whereGreaterThanOrEqualTo("date", startDate)
+            .whereLessThan("date", endDate)
+            .whereEqualTo("user",email)
+
     }
 
     private fun getExpense(): ArrayList<ExpenseViewModel> {
@@ -80,8 +103,8 @@ class ExpenseHomeFragment : Fragment() {
         Firebase.firestore.collection("users")
             .document(email)
             .get().addOnSuccessListener {
-                binding.textSalary.setText(it.getString("salary"))
-                binding.textTarget.setText(it.getString("targetSaving"))
+                binding.textSalary.setText("RM"+it.getString("salary"))
+                binding.textTarget.setText("RM"+it.getString("targetSaving"))
             }
             .addOnFailureListener {
                 Toast.makeText(requireContext(),"Error", Toast.LENGTH_SHORT).show()
