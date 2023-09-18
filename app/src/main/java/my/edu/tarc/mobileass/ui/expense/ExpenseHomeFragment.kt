@@ -7,10 +7,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -32,6 +34,7 @@ class ExpenseHomeFragment : Fragment() {
     ): View? {
         binding = FragmentExpenseHomeBinding.inflate(layoutInflater)
         getExpense()
+        loadUser()
         return binding.root
     }
 
@@ -67,6 +70,22 @@ class ExpenseHomeFragment : Fragment() {
         fab.setOnClickListener {
             showPopupMenu(it)
         }
+    }
+    private fun loadUser(){
+        val email:String
+        val user = FirebaseAuth.getInstance().getCurrentUser()
+        user.let {
+            email = it!!.email!!
+        }
+        Firebase.firestore.collection("users")
+            .document(email)
+            .get().addOnSuccessListener {
+                binding.textSalary.setText(it.getString("salary"))
+                binding.textTarget.setText(it.getString("targetSaving"))
+            }
+            .addOnFailureListener {
+                Toast.makeText(requireContext(),"Error", Toast.LENGTH_SHORT).show()
+            }
     }
 
 
