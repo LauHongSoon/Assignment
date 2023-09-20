@@ -53,7 +53,7 @@ class EditExpenseFragment : Fragment() {
         val key = args.id
 
         val newTitle = binding.editTextTitle.text.toString()
-        val newExpense = binding.editTextExpense.text.toString()
+        val newExpense = binding.editTextExpense.text.toString().toDouble()
         val newCategory = binding.spinner.selectedItem.toString()
         val newDate = binding.buttonDate.text.toString()
         db.document(key).update(
@@ -97,12 +97,12 @@ class EditExpenseFragment : Fragment() {
     private fun getExpense(id: String) {
         Firebase.firestore.collection("expense")
             .document(id!!).get().addOnSuccessListener {
-                val total = it.getString("expense")
+                val total = it.getDouble("expense")
                 val date = it.getString("date")
                 val title = it.getString("title")
                 val category = it.getString("category")
 
-                binding.editTextExpense.setText(total)
+                binding.editTextExpense.setText(total.toString())
                 binding.editTextTitle.setText(title)
                 binding.buttonDate.setText(date)
                 val spinner = binding.spinner
