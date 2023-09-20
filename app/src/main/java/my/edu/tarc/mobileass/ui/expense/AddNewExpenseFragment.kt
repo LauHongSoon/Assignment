@@ -72,11 +72,11 @@ class AddNewExpenseFragment : Fragment() {
         val email = preferences.getString("email", "")!!
         val data =  ExpenseViewModel(
             title = binding.editTextTitle.text.toString(),
-            date=binding.buttonDate.text.toString(),
-            user=email,
+            date =binding.buttonDate.text.toString(),
+            user =email,
             id = key,
-            category=binding.spinner.selectedItem.toString(),
-            expense=binding.editTextExpense.text.toString()
+            category =binding.spinner.selectedItem.toString(),
+            expense =binding.editTextExpense.text.toString().toDoubleOrNull(),
         )
         Firebase.firestore.collection("expense").document(key)
             .set(data).addOnSuccessListener {

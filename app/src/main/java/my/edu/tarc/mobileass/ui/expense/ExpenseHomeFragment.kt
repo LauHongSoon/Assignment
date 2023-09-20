@@ -20,7 +20,9 @@ import my.edu.tarc.mobileass.R
 import my.edu.tarc.mobileass.adapter.ExpenseListAdapter
 import my.edu.tarc.mobileass.databinding.FragmentExpenseHomeBinding
 import my.edu.tarc.mobileass.model.ExpenseViewModel
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
 
 
 class ExpenseHomeFragment : Fragment() {
@@ -39,25 +41,52 @@ class ExpenseHomeFragment : Fragment() {
         calculateExpense()
         return binding.root
 
+
     }
 
     private fun calculateExpense() {
-        val currentDate = Calendar.getInstance().time
-        val currentMonth = Calendar.getInstance()
-        currentMonth.time = currentDate
-        currentMonth.set(Calendar.DAY_OF_MONTH, 1)
-        val startDate = currentMonth.time
+        val currentYear = SimpleDateFormat("yyyy", Locale.getDefault()).format(Calendar.getInstance().time)
+        val currentMonth = SimpleDateFormat("MM", Locale.getDefault()).format(Calendar.getInstance().time)
 
-        val endOfMonth = Calendar.getInstance()
-        endOfMonth.time = currentDate
-        endOfMonth.set(Calendar.DAY_OF_MONTH, endOfMonth.getActualMaximum(Calendar.DAY_OF_MONTH)) // Set to the last day of the month
-        val endDate = endOfMonth.time
+        val totalExpenseTextView = binding.textExpense
+        var totalExpense = 0.0
+
         preferences = requireActivity().getSharedPreferences("user", Context.MODE_PRIVATE)
         val email = preferences.getString("email", "")!!
         Firebase.firestore.collection("expense")
-            .whereGreaterThanOrEqualTo("date", startDate)
-            .whereLessThan("date", endDate)
             .whereEqualTo("user",email)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                // Process the data in querySnapshot here
+                for (document in querySnapshot) {
+                    // Access the "date" field as a string
+                    val dateString = document.getString("date")
+
+                    // Parse the year and month parts from the date string
+                    val documentYear = dateString?.substring(0, 4)
+                    val documentMonth = dateString?.substring(5, 7)
+
+                    if (documentYear == currentYear && documentMonth == currentMonth) {
+                        // The document's year and month match the current year and month
+                        // Add the expense to the total
+                        val expense = document.getDouble("expense")
+                        if (expense != null) {
+                            totalExpense += expense
+                        }
+                    }
+                }
+                val formattedTotalExpense = String.format(Locale.getDefault(), "RM %.2f", totalExpense)
+                totalExpenseTextView.text = formattedTotalExpense
+                val textSalary = binding.textSalary.text.toString().replace("RM", "").toDoubleOrNull() ?: 0.0
+                val textExpense = totalExpense
+
+                val difference = textSalary - textExpense
+
+                // Display the result in a TextView
+                val resultTextView = binding.totalSave
+                val formattedDifference = String.format(Locale.getDefault(), "RM %.2f", difference)
+                resultTextView.text = formattedDifference
+            }
 
     }
 
