@@ -48,8 +48,9 @@ class AddTaskFragment : Fragment() {
         binding.todoNextBtn.setOnClickListener {
             val taskName = binding.taskName.text.toString()
             val dueDate = binding.dueDate.text.toString()
-            val category = binding.category.selectedItem.toString()
+            val category = binding.taskCategory.selectedItem.toString()
             val reminder = binding.taskReminder.text.toString()
+
 
             // Check if any field is empty
             if (taskName.isNotEmpty() && dueDate.isNotEmpty() && category.isNotEmpty() && reminder.isNotEmpty()) {

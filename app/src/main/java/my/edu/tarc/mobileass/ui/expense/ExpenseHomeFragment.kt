@@ -7,16 +7,22 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import my.edu.tarc.mobileass.R
 import my.edu.tarc.mobileass.adapter.ExpenseListAdapter
 import my.edu.tarc.mobileass.databinding.FragmentExpenseHomeBinding
 import my.edu.tarc.mobileass.model.ExpenseViewModel
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 
 class ExpenseHomeFragment : Fragment() {
@@ -31,7 +37,54 @@ class ExpenseHomeFragment : Fragment() {
     ): View? {
         binding = FragmentExpenseHomeBinding.inflate(layoutInflater)
         getExpense()
+        calculateExpense()
         return binding.root
+
+
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        val textSalary = binding.textSalary.text.toString().toDouble()
+        val textExpense = binding.textExpense.text.toString().toDouble()
+        val difference = textSalary - textExpense
+        val resultTextView = binding.totalSave
+        val formattedDifference = String.format(Locale.getDefault(), "RM %.2f", difference)
+        resultTextView.text = formattedDifference
+    }
+
+    private fun calculateExpense() {
+        val currentYear = SimpleDateFormat("yyyy", Locale.getDefault()).format(Calendar.getInstance().time)
+        val currentMonth = SimpleDateFormat("MM", Locale.getDefault()).format(Calendar.getInstance().time)
+
+        val totalExpenseTextView = binding.textExpense
+        var totalExpense = 0.0
+        loadUser()
+
+        preferences = requireActivity().getSharedPreferences("user", Context.MODE_PRIVATE)
+        val email = preferences.getString("email", "")!!
+        Firebase.firestore.collection("expense")
+            .whereEqualTo("user",email)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                for (document in querySnapshot) {
+                    val dateString = document.getString("date")
+                    val documentYear = dateString?.substring(0, 4)
+                    val documentMonth = dateString?.substring(5, 7)
+
+                    if (documentYear == currentYear && documentMonth == currentMonth) {
+                        val expense = document.getDouble("expense")
+                        if (expense != null) {
+                            totalExpense += expense
+                        }
+                    }
+                }
+
+                totalExpenseTextView.text = totalExpense.toString()
+
+            }
+
     }
 
     private fun getExpense(): ArrayList<ExpenseViewModel> {
@@ -40,6 +93,7 @@ class ExpenseHomeFragment : Fragment() {
         val email = preferences.getString("email", "")!!
         Firebase.firestore.collection("expense")
             .whereEqualTo("user",email)
+            .orderBy("date",Query.Direction.DESCENDING)
             .addSnapshotListener { querySnapshot, e ->
                 if (e != null) {
                     Log.d("MyApp", "Listen failed.", e)
@@ -65,8 +119,22 @@ class ExpenseHomeFragment : Fragment() {
         fab.setOnClickListener {
             showPopupMenu(it)
         }
-
-
+    }
+    private fun loadUser(){
+        val email:String
+        val user = FirebaseAuth.getInstance().getCurrentUser()
+        user.let {
+            email = it!!.email!!
+        }
+        Firebase.firestore.collection("users")
+            .document(email)
+            .get().addOnSuccessListener {
+                binding.textSalary.setText(it.getString("salary"))
+                binding.textTarget.setText("RM"+it.getString("targetSaving"))
+            }
+            .addOnFailureListener {
+                Toast.makeText(requireContext(),"Error", Toast.LENGTH_SHORT).show()
+            }
     }
 
 
@@ -78,10 +146,6 @@ class ExpenseHomeFragment : Fragment() {
             when (menuItem.itemId) {
                 R.id.add -> {
                     findNavController().navigate(R.id.action_navigation_expenses_to_addNewExpenseFragment)
-                    true
-                }
-                R.id.action_option2 -> {
-                    // Handle Option 2 click
                     true
                 }
                 else -> false

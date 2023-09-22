@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="my.edu.tarc.mobileass.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_addTaskFragment"
+            app:destination="@id/addTaskFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -55,10 +59,38 @@
         <action
             android:id="@+id/action_navigation_expenses_to_addNewExpenseFragment"
             app:destination="@id/addNewExpenseFragment" />
+        <action
+            android:id="@+id/action_navigation_expenses_to_editExpenseFragment"
+            app:destination="@id/editExpenseFragment" />
     </fragment>
     <fragment
         android:id="@+id/addNewExpenseFragment"
         android:name="my.edu.tarc.mobileass.ui.expense.AddNewExpenseFragment"
         android:label="fragment_add_new_expense"
-        tools:layout="@layout/fragment_add_new_expense" />
+        tools:layout="@layout/fragment_add_new_expense" >
+        <action
+            android:id="@+id/action_addNewExpenseFragment_to_navigation_expenses"
+            app:destination="@id/navigation_expenses" />
+    </fragment>
+    <fragment
+        android:id="@+id/editExpenseFragment"
+        android:name="my.edu.tarc.mobileass.ui.expense.EditExpenseFragment"
+        android:label="fragment_edit_expense"
+        tools:layout="@layout/fragment_edit_expense" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_editExpenseFragment_to_navigation_expenses"
+            app:destination="@id/navigation_expenses" />
+    </fragment>
+    <fragment
+        android:id="@+id/addTaskFragment"
+        android:name="my.edu.tarc.mobileass.Activity.AddTaskFragment"
+        android:label="fragment_add_task"
+        tools:layout="@layout/fragment_add_task" >
+        <action
+            android:id="@+id/action_addTaskFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 </navigation>

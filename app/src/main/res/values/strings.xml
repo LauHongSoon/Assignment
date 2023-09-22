@@ -41,6 +41,8 @@
     <string name="category">Category</string>
     <string name="update">Update</string>
     <string name="delete">Delete\n</string>
+    <string name="edit">Edit Expense\n</string>
+    <string name="totalsave">Total Save</string>
     <string-array name="category">
         <item>Utility Fee</item>
         <item>Grocery</item>
@@ -55,5 +57,9 @@
         <item>Personal</item>
         <item>Work</item>
         <item>Study</item>
+    </string-array>
+    <string-array name="Status">
+        <item>Pending</item>
+        <item>Prior</item>
     </string-array>
 </resources>
