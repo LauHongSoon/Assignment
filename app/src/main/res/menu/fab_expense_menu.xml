@@ -3,8 +3,5 @@
     <item
         android:id="@+id/add"
         android:title="Add new Expense" />
-    <item
-        android:id="@+id/action_option2"
-        android:title="Option 2" />
 
 </menu>

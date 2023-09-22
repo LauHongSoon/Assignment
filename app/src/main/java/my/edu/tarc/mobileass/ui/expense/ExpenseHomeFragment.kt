@@ -142,10 +142,6 @@ class ExpenseHomeFragment : Fragment() {
                     findNavController().navigate(R.id.action_navigation_expenses_to_addNewExpenseFragment)
                     true
                 }
-                R.id.action_option2 -> {
-                    // Handle Option 2 click
-                    true
-                }
                 else -> false
             }
         }
