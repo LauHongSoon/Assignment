@@ -43,6 +43,17 @@ class ExpenseHomeFragment : Fragment() {
 
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        val textSalary = binding.textSalary.text.toString().toDouble()
+        val textExpense = binding.textExpense.text.toString().toDouble()
+        val difference = textSalary - textExpense
+        val resultTextView = binding.totalSave
+        val formattedDifference = String.format(Locale.getDefault(), "RM %.2f", difference)
+        resultTextView.text = formattedDifference
+    }
+
     private fun calculateExpense() {
         val currentYear = SimpleDateFormat("yyyy", Locale.getDefault()).format(Calendar.getInstance().time)
         val currentMonth = SimpleDateFormat("MM", Locale.getDefault()).format(Calendar.getInstance().time)
@@ -69,14 +80,9 @@ class ExpenseHomeFragment : Fragment() {
                         }
                     }
                 }
-                val formattedTotalExpense = String.format(Locale.getDefault(), "RM %.2f", totalExpense)
-                totalExpenseTextView.text = formattedTotalExpense
-                val textSalary = binding.textSalary.text.toString().toDoubleOrNull() ?: 0.0
-                val textExpense = totalExpense
-                val difference = textSalary - textExpense
-                val resultTextView = binding.totalSave
-                val formattedDifference = String.format(Locale.getDefault(), "RM %.2f", difference)
-                resultTextView.text = formattedDifference
+
+                totalExpenseTextView.text = totalExpense.toString()
+
             }
 
     }
@@ -123,7 +129,7 @@ class ExpenseHomeFragment : Fragment() {
         Firebase.firestore.collection("users")
             .document(email)
             .get().addOnSuccessListener {
-                binding.textSalary.setText("RM"+it.getString("salary"))
+                binding.textSalary.setText(it.getString("salary"))
                 binding.textTarget.setText("RM"+it.getString("targetSaving"))
             }
             .addOnFailureListener {
