@@ -31,15 +31,6 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/textView19"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="RM"
-
-                android:textAlignment="viewEnd" />
-
-            <TextView
                 android:id="@+id/textSalary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -60,15 +51,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/totalexpense"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/textView20"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="RM"
-                android:textAlignment="viewEnd"
                 android:textSize="16sp" />
 
 
@@ -96,15 +78,6 @@
                 android:text="@string/monthly_target"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/textView16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="RM"
-                android:textAlignment="viewEnd"
-                android:textSize="16sp" />
-
 
             <TextView
                 android:id="@+id/textTarget"
@@ -129,15 +102,6 @@
                 android:layout_weight="1"
                 android:text="@string/totalsave"
                 android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/textView17"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="RM"
-                android:textAlignment="viewEnd"
-                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/totalSave"
