@@ -6,4 +6,6 @@ data class Task(
     val taskCategory: String?="",
     val taskReminder:String?="",
     val taskStatus:String?="",
+    val user:String?="",
+    val id:String?=""
 )
