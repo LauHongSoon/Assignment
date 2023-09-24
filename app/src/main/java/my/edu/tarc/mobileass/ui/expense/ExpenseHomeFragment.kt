@@ -130,7 +130,7 @@ class ExpenseHomeFragment : Fragment() {
             .document(email)
             .get().addOnSuccessListener {
                 binding.textSalary.setText(it.getString("salary"))
-                binding.textTarget.setText("RM"+it.getString("targetSaving"))
+                binding.textTarget.setText(it.getString("targetSaving"))
             }
             .addOnFailureListener {
                 Toast.makeText(requireContext(),"Error", Toast.LENGTH_SHORT).show()
