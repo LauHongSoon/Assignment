@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.Query
+
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import my.edu.tarc.mobileass.R
@@ -26,8 +27,6 @@ class HomeFragment : Fragment() {
     private lateinit var preferences: SharedPreferences
     private var _binding: FragmentHomeBinding? = null
     private lateinit var addTaskBtn: FloatingActionButton
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -41,11 +40,6 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-
         getTask()
         return root
     }
@@ -56,7 +50,6 @@ class HomeFragment : Fragment() {
         val email = preferences.getString("email", "")!!
         Firebase.firestore.collection("task")
             .whereEqualTo("user",email)
-            .orderBy("date", Query.Direction.DESCENDING)
             .addSnapshotListener { querySnapshot, e ->
                 if (e != null) {
                     Log.d("MyApp", "Listen failed.", e)

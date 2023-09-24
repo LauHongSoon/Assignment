@@ -10,31 +10,21 @@ import my.edu.tarc.mobileass.model.Task
 class TaskAdapter(private val list:ArrayList<Task>, val context : Context):
     RecyclerView.Adapter<TaskAdapter.ViewHolder>()  {
 
-    inner class ViewHolder(private val binding:EachTaskBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(val binding: EachTaskBinding)
+        :RecyclerView.ViewHolder(binding.root)
 
-        fun bind(task: Task) {
-            // Bind data to views in the layout using ViewBinding
-            binding.taskName.text = task.taskName
-            binding.dueDate.text = task.dueDate
-            binding.category.text = task.taskCategory
-            binding.taskStatus.text = task.taskStatus
-            // Bind other views as needed
-        }
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = EachTaskBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        )
+       val binding=EachTaskBinding.inflate(LayoutInflater.from(context),parent,false)
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val task = list[position]
-        holder.bind(task)
+        val task: Task= list[position]
+        holder.binding.taskName.text=task.taskName
+        holder.binding.category.text=task.taskCategory
+        holder.binding.taskStatus.text=task.taskStatus
+        holder.binding.dueDate.text=task.dueDate
     }
 
     override fun getItemCount(): Int {
