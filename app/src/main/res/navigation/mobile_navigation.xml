@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_navigation_home_to_addTaskFragment"
             app:destination="@id/addTaskFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_editTaskFragment3"
+            app:destination="@id/editTaskFragment3" />
     </fragment>
 
     <fragment
@@ -32,7 +35,11 @@
         android:id="@+id/navigation_notifications"
         android:name="my.edu.tarc.mobileass.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_notifications" >
+        <action
+            android:id="@+id/action_navigation_notifications_to_editTaskFragment3"
+            app:destination="@id/editTaskFragment3" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="my.edu.tarc.mobileass.ui.settings.ProfileFragment"
@@ -86,11 +93,24 @@
     </fragment>
     <fragment
         android:id="@+id/addTaskFragment"
-        android:name="my.edu.tarc.mobileass.Activity.AddTaskFragment"
+        android:name="my.edu.tarc.mobileass.ui.task.AddTaskFragment"
         android:label="fragment_add_task"
         tools:layout="@layout/fragment_add_task" >
         <action
             android:id="@+id/action_addTaskFragment_to_navigation_home"
+            app:destination="@id/navigation_home"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/editTaskFragment3"
+        android:name="my.edu.tarc.mobileass.ui.task.EditTaskFragment"
+        android:label="fragment_edit_task"
+        tools:layout="@layout/fragment_edit_task" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_editTaskFragment3_to_navigation_home"
             app:destination="@id/navigation_home" />
     </fragment>
 </navigation>

@@ -53,7 +53,7 @@ class EditExpenseFragment : Fragment() {
         val key = args.id
 
         val newTitle = binding.editTextTitle.text.toString()
-        val newExpense = binding.editTextExpense.text.toString().toDouble()
+        val newExpense = binding.editTextExpense.text.toString().toDoubleOrNull()
         val newCategory = binding.spinner.selectedItem.toString()
         val newDate = binding.buttonDate.text.toString()
         db.document(key).update(

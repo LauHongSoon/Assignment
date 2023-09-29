@@ -1,9 +1,9 @@
 package my.edu.tarc.mobileass.Activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -65,7 +65,7 @@ class RegisterActivity : AppCompatActivity() {
                 user?.let {
                     email = it.email
                 }
-                Toast.makeText(this, "Registered & Signed In As $email", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Registered As $email", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener {
                 Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()

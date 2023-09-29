@@ -7,27 +7,23 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.firebase.firestore.Query
-
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import my.edu.tarc.mobileass.R
-import my.edu.tarc.mobileass.adapter.ExpenseListAdapter
 import my.edu.tarc.mobileass.adapter.TaskAdapter
 import my.edu.tarc.mobileass.databinding.FragmentHomeBinding
-import my.edu.tarc.mobileass.model.ExpenseViewModel
 import my.edu.tarc.mobileass.model.Task
 
 class HomeFragment : Fragment() {
     private lateinit var preferences: SharedPreferences
-    private var _binding: FragmentHomeBinding? = null
+    private lateinit var binding: FragmentHomeBinding
     private lateinit var addTaskBtn: FloatingActionButton
-    private val binding get() = _binding!!
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,11 +33,10 @@ class HomeFragment : Fragment() {
         val homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        binding = FragmentHomeBinding.inflate(layoutInflater)
 
         getTask()
-        return root
+        return binding.root
     }
 
     private fun getTask(): ArrayList<Task> {
@@ -74,10 +69,8 @@ class HomeFragment : Fragment() {
         addTaskBtn.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_addTaskFragment)
         }
+
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+
 }

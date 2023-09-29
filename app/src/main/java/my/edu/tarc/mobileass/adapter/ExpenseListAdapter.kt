@@ -28,7 +28,7 @@ class ExpenseListAdapter(private val list:ArrayList<ExpenseViewModel>, val conte
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val data: ExpenseViewModel = list[position]
         holder.binding.textDate.text=data.date
-        holder.binding.texttotalExpense.text=data.expense.toString()
+        holder.binding.texttotalExpense.text="RM"+ data.expense.toString()
         holder.binding.textTitle.text=data.title
         holder.binding.textCategory.text=data.category
 

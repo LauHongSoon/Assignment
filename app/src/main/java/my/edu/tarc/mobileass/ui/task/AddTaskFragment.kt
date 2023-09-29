@@ -1,27 +1,26 @@
-package my.edu.tarc.mobileass.Activity
+package my.edu.tarc.mobileass.ui.task
 
 import android.R
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import my.edu.tarc.mobileass.databinding.FragmentAddTaskBinding // Replace with your actual binding class
-import com.google.firebase.firestore.FirebaseFirestore
-import java.text.SimpleDateFormat
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.icu.util.Calendar
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import my.edu.tarc.mobileass.databinding.FragmentAddTaskBinding
 import my.edu.tarc.mobileass.model.Task
 import java.sql.Date
+import java.text.SimpleDateFormat
 import java.util.Locale
 
 class AddTaskFragment : Fragment() {
@@ -34,6 +33,7 @@ class AddTaskFragment : Fragment() {
     private lateinit var taskStatus: Spinner
     private lateinit var spinnerAdapter: ArrayAdapter<String>
     private lateinit var spinnerAdapter2: ArrayAdapter<String>
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,6 +56,8 @@ class AddTaskFragment : Fragment() {
         spinnerAdapter2.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
         taskCategory.adapter = spinnerAdapter
         taskStatus.adapter = spinnerAdapter2
+        binding.taskReminder.isFocusableInTouchMode = false
+        binding.dueDate.isFocusableInTouchMode=false
         return binding.root
     }
 
@@ -75,22 +77,21 @@ class AddTaskFragment : Fragment() {
         // Handle save button click
         binding.todoNextBtn.setOnClickListener {
             saveRecord()
-//            val taskName = binding.taskName.text.toString()
-//            val dueDate = binding.dueDate.text.toString()
-//            val category = binding.taskCategory.selectedItem.toString()
-//            val reminder = binding.taskReminder.text.toString()
-//
-//
-//            // Check if any field is empty
-//            if (taskName.isNotEmpty() && dueDate.isNotEmpty() && category.isNotEmpty() && reminder.isNotEmpty()) {
-//                addTaskToFirestore(taskName, dueDate, category, reminder)
-//            } else {
-//                Snackbar.make(view, "Please fill in all fields", Snackbar.LENGTH_SHORT).show()
-//            }
         }
     }
 
     private fun saveRecord() {
+        // Validate input fields
+        val taskName = binding.taskName.text.toString().trim()
+        val taskReminder = binding.taskReminder.text.toString().trim()
+        val dueDate = binding.dueDate.text.toString().trim()
+
+        if (taskName.isEmpty() || taskReminder.isEmpty() || dueDate.isEmpty()) {
+            // Show a toast message if any of the required fields is empty
+            Toast.makeText(requireContext(), "Please fill in all required fields", Toast.LENGTH_SHORT).show()
+            return // Exit the function without saving
+        }
+
         val db = Firebase.firestore.collection("task")
         val key = db.document().id
         preferences = requireActivity().getSharedPreferences("user", Context.MODE_PRIVATE)
@@ -103,20 +104,22 @@ class AddTaskFragment : Fragment() {
             taskReminder =binding.taskReminder.text.toString(),
             dueDate = binding.dueDate.text.toString(),
             taskStatus = binding.taskStatus.selectedItem.toString(),
-        )
+            )
         Firebase.firestore.collection("task").document(key)
             .set(data).addOnSuccessListener {
+                Toast.makeText(requireContext(), "Added Successfully", Toast.LENGTH_SHORT).show()
                 val user = FirebaseAuth.getInstance().getCurrentUser()
                 var email:String? = ""
                 findNavController().navigate(my.edu.tarc.mobileass.R.id.action_addTaskFragment_to_navigation_home)
                 user?.let {
                     email = it.email
                 }
-                Toast.makeText(requireContext(), "Added Successfully", Toast.LENGTH_SHORT).show()
+
             }
             .addOnFailureListener {
                 Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
             }
+
     }
 
     private fun showTaskReminderPickerDialog() {
@@ -160,38 +163,7 @@ class AddTaskFragment : Fragment() {
             calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH)
         )
-
         // Show the DatePickerDialog
         datePickerDialog.show()
-    }
-
-//    private fun addTaskToFirestore(taskName: String, dueDate: String, category: String, reminder: String) {
-//        // Create a new task object
-//        val task = hashMapOf(
-//            "taskName" to taskName,
-//            "dueDate" to dueDate,
-//            "category" to category,
-//            "reminder" to reminder
-//            // Add more fields as needed
-//        )
-//
-//        // Add the task to a "tasks" collection in Firestore
-//        firestore.collection("tasks")
-//            .add(task)
-//            .addOnSuccessListener { documentReference ->
-//                // Task added successfully
-//                // You can handle success, such as showing a toast or navigating to a different screen
-//                Snackbar.make(requireView(), "Task added successfully", Snackbar.LENGTH_SHORT).show()
-//            }
-//            .addOnFailureListener { e ->
-//                // Handle any errors that occurred while adding the task
-//                // You can display an error message to the user
-//                Snackbar.make(requireView(), "Error adding task: ${e.message}", Snackbar.LENGTH_SHORT).show()
-//            }
-//    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

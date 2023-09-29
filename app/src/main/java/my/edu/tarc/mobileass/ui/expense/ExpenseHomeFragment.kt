@@ -44,16 +44,6 @@ class ExpenseHomeFragment : Fragment() {
     }
 
 
-    override fun onResume() {
-        super.onResume()
-        val textSalary = binding.textSalary.text.toString().toDouble()
-        val textExpense = binding.textExpense.text.toString().toDouble()
-        val difference = textSalary - textExpense
-        val resultTextView = binding.totalSave
-        val formattedDifference = String.format(Locale.getDefault(), "RM %.2f", difference)
-        resultTextView.text = formattedDifference
-    }
-
     private fun calculateExpense() {
         val currentYear = SimpleDateFormat("yyyy", Locale.getDefault()).format(Calendar.getInstance().time)
         val currentMonth = SimpleDateFormat("MM", Locale.getDefault()).format(Calendar.getInstance().time)
@@ -81,7 +71,7 @@ class ExpenseHomeFragment : Fragment() {
                     }
                 }
 
-                totalExpenseTextView.text = totalExpense.toString()
+                totalExpenseTextView.text = "RM"+totalExpense.toString()
 
             }
 
@@ -129,8 +119,8 @@ class ExpenseHomeFragment : Fragment() {
         Firebase.firestore.collection("users")
             .document(email)
             .get().addOnSuccessListener {
-                binding.textSalary.setText(it.getString("salary"))
-                binding.textTarget.setText(it.getString("targetSaving"))
+                binding.textSalary.setText("RM"+it.getString("salary"))
+                binding.textTarget.setText("RM"+it.getString("targetSaving"))
             }
             .addOnFailureListener {
                 Toast.makeText(requireContext(),"Error", Toast.LENGTH_SHORT).show()

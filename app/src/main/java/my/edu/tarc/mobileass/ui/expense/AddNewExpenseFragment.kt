@@ -66,6 +66,14 @@ class AddNewExpenseFragment : Fragment() {
     }
 
     private fun saveRecord() {
+        val title=binding.editTextTitle.toString()
+        val category=binding.spinner.selectedItem.toString()
+        val expense=binding.editTextExpense.text.toString()
+        val date=binding.buttonDate.text.toString()
+        if(title.isEmpty()||category.isEmpty()||expense.isEmpty()||date.equals("Date")){
+            Toast.makeText(requireContext(), "Please fill in all required fields", Toast.LENGTH_SHORT).show()
+            return // Exit the function wit
+        }
         val db = Firebase.firestore.collection("expense")
         val key = db.document().id
         preferences = requireActivity().getSharedPreferences("user", Context.MODE_PRIVATE)
